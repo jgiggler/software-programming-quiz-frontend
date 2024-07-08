@@ -1,0 +1,76 @@
+.logo {
+    width: 100px;
+}
+.sidebar {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background:linear-gradient(black,blue); /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+  }
+.sidebar .social-box {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    width: 100%;
+    bottom: 60px;
+    
+  }
+.sidebar footer{
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+}
+.sidebar a:hover {
+    color: #f1f1f1;
+  }
+body {
+    background-color: #111;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+    
+  }
+#root {
+    margin-left: 70px;
+    text-align: center;
+    color: whitesmoke;
+}
+main{
+    margin-left: 160px;
+    margin-right: 20px;
+}
+.logout {
+    margin-top: 10px;
+}
+.sidebar a {
+    font-size: 25px;
+    padding: 6px;
+    text-decoration: none;
+    background: linear-gradient(rgb(110, 16, 103), rgb(156, 137, 74));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    display: block;
+}
+.sidebar .socials {
+    font-size: 15px;
+}
+h1 {
+  font-family: 'Impact', sans-serif;
+  position: relative;
+  font-size: 40px;
+  text-align: center;
+  color: whitesmoke;
+  margin-top: 0px;
+  
+  width: 100%;
+  background: black;
+  
+}
+
