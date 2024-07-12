@@ -13,8 +13,10 @@ function Nav({}) {
       
         <Link to="/" onClick={() => setIsOpen(false)}>Home</Link>
         <Link to="/login" onClick={() => setIsOpen(false)}>Login</Link>
+        <Link to="/signup" onClick={() => setIsOpen(false)}>Signup</Link>
+        <Link to="/create-quiz" onClick={() => setIsOpen(false)}>Create a Quiz</Link>
         
-        <button className='logout' >Logout Now</button>
+        {/* <button className='logout' >Logout Now</button> */}
         <div className='social-box'>
             <a className="socials" href='http://twitter.com'>Twitter</a>
         </div>

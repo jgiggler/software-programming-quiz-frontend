@@ -3,19 +3,24 @@ import { useNavigate } from 'react-router-dom';
 
 function HomePage({}) {
   const navigate = useNavigate()
-
+  const login = () =>{
+    navigate("/login")
+  };
+  const signup = () =>{
+    navigate("/signup")
+  };
   const LoggedIn = true
-  if (LoggedIn === false){
+  if (LoggedIn === true){
     return (
         <>
     <h2>Homepage</h2>
       <p>
-        Learn about personal finance, investing, real estate, 
-        cryptocurrency and all things related to finance.
+        A website for testing incoming employment candidates.
       </p>
-      <p>To learn things about money Login or Sign Up right now!</p>
-      <button className='login-stack'>Login</button>
-      <button className='login-stack'>Sign Up</button>
+      <p>All you have to do is create a quiz then you can send a quiz link to any candidate</p>
+      <p>To get started <button className='login-stack' onClick={login}>Login</button> or <button className='login-stack' onClick={signup}>Sign Up</button> right now!</p>
+      
+      
       
         </>
 
@@ -25,11 +30,9 @@ function HomePage({}) {
       <>
     <h2>Homepage</h2>
     <p>
-      Learn about personal finance, investing, real estate, 
-      cryptocurrency and all things related to finance.
+    A website for testing incoming employment candidates.
     </p>
-    <p>Welcome!</p>
-    
+    <p>Welcome $user (UPDATE USER)</p>
     </>
     )
   }

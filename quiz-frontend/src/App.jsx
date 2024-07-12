@@ -5,6 +5,8 @@ import './App.css'
 import Nav from './components/Nav';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import CreateQuiz from './pages/CreateQuizPage';
+import SignUpPage from './pages/SignUpPage';
 
 function App() {
   
@@ -21,6 +23,8 @@ function App() {
     <Routes>
       <Route path='/' element={<HomePage/>}/>
       <Route path='/login' element={<LoginPage/>}/>
+      <Route path='/create-quiz' element={<CreateQuiz/>}/>
+      <Route path='/signup' element={<SignUpPage/>}/>
     </Routes>
     </main>
 
