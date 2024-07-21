@@ -4,10 +4,9 @@ import { useNavigate } from 'react-router-dom';
 function LoginPage({}) {
   const [isCorrect, setisCorrect] = useState(undefined)
   const navigateTo = useNavigate();
-  
 
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: ''
   });
   const signup = () =>{
@@ -20,32 +19,30 @@ function LoginPage({}) {
     });
   };
   
-  const handleSubmit = async (e) => {};
-  //   e.preventDefault();
-  //   console.log('Form submitted with:', formData);
-  //   try{
-  //     const response = await fetch('http://127.0.0.1:5000/login', {method: 'POST',
-  //                                                 headers: {'Content-Type': 'application/json'},
-  //                                                 body: JSON.stringify(formData),});
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Form submitted with:', formData);
+    try{
+      const response = await fetch('http://127.0.0.1:4546/login', {method: 'POST',
+                                                  headers: {'Content-Type': 'application/json'},
+                                                  body: JSON.stringify(formData),});
     
-  //   const data = await response.json();
-  //   console.log(data.message)
-    
-  //   if (response.status ===200){
-  //     setisCorrect(true);
-  //     login();
-  //     navigateTo('/');
-  //   }
-  //   else {
-  //     setisCorrect(false)
-  //     navigateTo('/login')
-  //   }
-  //   } catch (error) 
-  //     {console.error('Login failed:', error);
-  //   }
-    
-    
-  // };
+    const data = await response.json();
+    console.log(data.message)
+  
+    if (response.status ===200){
+      setisCorrect(true);
+      login();
+      navigateTo('/');
+    }
+    else {
+      setisCorrect(false)
+      navigateTo('/login')
+    }
+    } catch (error) 
+      {console.error('Login failed:', error);
+    }
+  };
 
     return (
         <>
@@ -53,13 +50,13 @@ function LoginPage({}) {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="email">Email:</label>
           <input 
             type="text" 
-            id="username" 
-            name="username" 
+            id="email" 
+            name="email" 
             required
-            value={formData.username} 
+            value={formData.email} 
             onChange={handleChange} 
           />
         </div>
@@ -75,17 +72,17 @@ function LoginPage({}) {
           />
         </div>
         <div className='login-stack'>
-        <button className='login-stack' type="submit">Login</button>
+        <button className='login-stack' type="submit" onClick={handleSubmit}>Login</button>
         <button className='login-stack' onClick={signup}>Create an Account</button>
         </div>
       </form>
       <p>
-      {isCorrect !== undefined && <Message isCorrect={isCorrect}/>}
+      
       </p>
     </div>
       
         </>
     )
-}
+  }
 
 export default LoginPage;
