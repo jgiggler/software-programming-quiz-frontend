@@ -76,6 +76,8 @@ const CreateQuiz = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <label>Quiz Name: <input type="text"></input></label>
+      <label>Quiz Description: <input type="text"></input></label>
       {quiz.map((q, qIndex) => (
         <div key={qIndex} style={{ marginBottom: '20px' }}>
             <label>
@@ -134,9 +136,14 @@ const CreateQuiz = () => {
           </label>
         </div>
       ))}
+      <p>How much time should be allowed to take the quiz?</p>
+      <label for='timer'> Minutes</label>
+      <input type="number" min="1" id='timer' name='timer'/>
+      <p></p>
       <button type="button" onClick={handleAddQuestion}>
         Add Question
       </button>
+      
       <button type="button" onClick={handleRemoveLastQuestion}>
         Remove Last Question
       </button>

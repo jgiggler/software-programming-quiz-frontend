@@ -51,7 +51,7 @@ function LoginPage({employerID, setEmployerID}) {
         <div>
           <label htmlFor="email">Email:</label>
           <input 
-            type="text" 
+            type="email" 
             id="email" 
             name="email" 
             required
