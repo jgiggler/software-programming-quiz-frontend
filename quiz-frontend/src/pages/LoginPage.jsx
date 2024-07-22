@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function LoginPage({}) {
-  const [isCorrect, setisCorrect] = useState(undefined)
+function LoginPage({employerID, setEmployerID}) {
   const navigateTo = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -31,12 +30,10 @@ function LoginPage({}) {
     console.log(data.message)
   
     if (response.status ===200){
-      setisCorrect(true);
-      login();
+      setEmployerID(data.employer_id);
       navigateTo('/');
     }
     else {
-      setisCorrect(false)
       navigateTo('/login')
     }
     } catch (error) 

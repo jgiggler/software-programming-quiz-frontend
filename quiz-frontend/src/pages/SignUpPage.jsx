@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Taken from '../components/SignupTakenMessage';
 import TandC from '../components/Terms&Conditions';
 
-function SignUpPage() {
+function SignUpPage({employerID, setEmployerID}) {
   const [isCorrect, setisCorrect] = useState(undefined)
   const navigateTo = useNavigate();
   const [isOpen, setisOpen] = useState(false);
@@ -20,9 +20,7 @@ function SignUpPage() {
     }
   };
  
-
   const [formData, setFormData] = useState({
-    username: '',
     email: '',
     password: ''
   });
@@ -42,7 +40,7 @@ function SignUpPage() {
       console.log('Form submission cancelled.');
     }
     try{
-      const response = await fetch('http://127.0.0.1:5000/signup', {method: 'POST',
+      const response = await fetch('http://127.0.0.1:4546/create-account', {method: 'POST',
                                                   headers: {'Content-Type': 'application/json'},
                                                   body: JSON.stringify(formData),});
     
@@ -55,7 +53,7 @@ function SignUpPage() {
     }
     else {
       setisCorrect(true)
-      navigateTo('/Stocks')
+      navigateTo('/Home')
     }
     } catch (error) 
       {console.error('Login failed:', error);
@@ -75,17 +73,6 @@ function SignUpPage() {
       {isCorrect !== undefined && <Taken isCorrect={isCorrect}/>}
       </p>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input 
-            type="text" 
-            id="username" 
-            name="username" 
-            required
-            value={formData.username} 
-            onChange={handleChange} 
-          />
-        </div>
         <div>
           <label htmlFor="email">Email:</label>
           <input 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function HomePage({}) {
+function HomePage({employerID, setEmployerID}) {
+  
   const navigate = useNavigate()
   const login = () =>{
     navigate("/login")
@@ -10,7 +11,7 @@ function HomePage({}) {
     navigate("/signup")
   };
   const LoggedIn = true
-  if (LoggedIn === true){
+  if (employerID == undefined){
     return (
         <>
     <h2>Homepage</h2>
@@ -19,8 +20,6 @@ function HomePage({}) {
       </p>
       <p>All you have to do is create a quiz then you can send a quiz link to any candidate</p>
       <p>To get started <button className='login-stack' onClick={login}>Login</button> or <button className='login-stack' onClick={signup}>Sign Up</button> right now!</p>
-      
-      
       
         </>
 
@@ -32,11 +31,10 @@ function HomePage({}) {
     <p>
     A website for testing incoming employment candidates.
     </p>
-    <p>Welcome $user (UPDATE USER)</p>
+    <p>Welcome Employer #{employerID}</p>
     </>
     )
   }
-  
 }
 
 export default HomePage;

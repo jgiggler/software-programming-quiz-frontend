@@ -1,5 +1,7 @@
 .logo {
     width: 100px;
+    border: 2px white solid;
+    border-radius: 5px;
 }
 .sidebar {
     height: 100%; /* Full-height: remove this if you want "auto" height */
@@ -52,7 +54,7 @@ main{
     font-size: 25px;
     padding: 6px;
     text-decoration: none;
-    background: linear-gradient(rgb(110, 16, 103), rgb(156, 137, 74));
+    background: linear-gradient(purple,white, purple);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -64,13 +66,18 @@ main{
 h1 {
   font-family: 'Impact', sans-serif;
   position: relative;
+  text-shadow: 
+        0 0 5px blue,
+        0 0 10px blue,
+        0 0 15px purple,
+        0 0 20px purple;
   font-size: 40px;
   text-align: center;
   color: whitesmoke;
   margin-top: 0px;
-  
+  padding: 15px;
   width: 100%;
-  background: black;
+  background: rgb(6, 5, 17);
   
 }
 
