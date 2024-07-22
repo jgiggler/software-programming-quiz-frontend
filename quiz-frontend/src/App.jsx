@@ -8,9 +8,11 @@ import LoginPage from './pages/LoginPage';
 import CreateQuiz from './pages/CreateQuizPage';
 import SignUpPage from './pages/SignUpPage';
 import AccountPage from './pages/AccountPage';
+import QuizzesPage from './pages/QuizzesPage';
+import ResultsPage from './pages/ResultsPage';
 
 function App() {
-  const [employerID, setEmployerID] = useState(undefined)
+  const [employerID, setEmployerID] = useState(123)
   
   return (
     <>
@@ -27,6 +29,8 @@ function App() {
       <Route path='/create-quiz' element={<CreateQuiz employerID={employerID} setEmployerID={setEmployerID}/>}/>
       <Route path='/signup' element={<SignUpPage employerID={employerID} setEmployerID={setEmployerID}/>}/>
       <Route path='/account-settings' element={<AccountPage employerID={employerID} setEmployerID={setEmployerID}/>}/>
+      <Route path='/quizzes' element={<QuizzesPage employerID={employerID} setEmployerID={setEmployerID}/>}/>
+      <Route path="/results" element={<ResultsPage/>} />
     </Routes>
     </main>
 

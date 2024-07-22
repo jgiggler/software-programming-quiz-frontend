@@ -81,3 +81,27 @@ h1 {
   
 }
 
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+th {
+  background: linear-gradient(200deg, rgb(73, 0, 73),black, rgb(0, 0, 117));
+}
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+table {
+  width: 90%; /* Adjust the width as needed */
+}
+/* Alternating row colors */
+tr:nth-child(odd) {
+  background-color: black;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(31, 29, 29);
+}

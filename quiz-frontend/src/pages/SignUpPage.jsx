@@ -49,11 +49,13 @@ function SignUpPage({employerID, setEmployerID}) {
     
     if (data.message === "Username already in use"){
       setisCorrect(false)
+      setEmployerID(undefined)
       navigateTo('/signup')
     }
     else {
       setisCorrect(true)
-      navigateTo('/Home')
+      setEmployerID(data.employer_id)
+      navigateTo('/')
     }
     } catch (error) 
       {console.error('Login failed:', error);
@@ -62,8 +64,7 @@ function SignUpPage({employerID, setEmployerID}) {
     
   };
 
-
-
+  if (employerID == undefined){
     return (
         <>
     <div>
@@ -110,6 +111,7 @@ function SignUpPage({employerID, setEmployerID}) {
     
         </>
     )
+  }
 }
 
 export default SignUpPage;

@@ -34,6 +34,7 @@ function Nav({employerID, setEmployerID}) {
                 
                 <Link to="/">Home</Link>
                 <Link to="/create-quiz">Create a Quiz</Link>
+                <Link to="/quizzes">Quizzes</Link>
                 <Link to="/account-settings">Account Settings</Link>
                 
                 <button className='logout' onClick={handleLogout}>Logout Now</button>

@@ -34,6 +34,7 @@ function LoginPage({employerID, setEmployerID}) {
       navigateTo('/');
     }
     else {
+      setEmployerID(undefined)
       navigateTo('/login')
     }
     } catch (error) 
@@ -41,6 +42,7 @@ function LoginPage({employerID, setEmployerID}) {
     }
   };
 
+  if (employerID == undefined){
     return (
         <>
     <div>
@@ -81,5 +83,6 @@ function LoginPage({employerID, setEmployerID}) {
         </>
     )
   }
+}
 
 export default LoginPage;
