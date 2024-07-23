@@ -39,9 +39,14 @@ function AccountPage({employerID, setEmployerID}) {
         const confirmDelete = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
         if (confirmDelete) {
           try {
-            await axios.delete('http://127.0.0.1:4546/delete-user');
-            console.log('Account deleted');
-            navigateTo("/")
+            const response = await axios.delete('http://127.0.0.1:4546/delete-user', {
+              data: {employer_id: employerID},
+            });
+            if (response.status === 200) {
+              console.log('Account deleted');
+              navigateTo("/")
+            }
+
           } catch (error) {
             console.error('Error deleting account:', error);
           }
@@ -69,7 +74,7 @@ function AccountPage({employerID, setEmployerID}) {
       </form>
       <p>Delete Account</p>
       <button className='login-stack' onClick={handleDelete} style={{ marginTop: '20px', color: 'red' }}>Delete Account</button>
-       
+      
       
         </>
     )

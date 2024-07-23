@@ -147,7 +147,7 @@ const CreateQuiz = () => {
       <button type="button" onClick={handleRemoveLastQuestion}>
         Remove Last Question
       </button>
-      <button type="submit">Submit Quiz</button>
+      <button type="submit" onClick={handleSubmit}>Submit Quiz</button>
     </form>
   );
 };
