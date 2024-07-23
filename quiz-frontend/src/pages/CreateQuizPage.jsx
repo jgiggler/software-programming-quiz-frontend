@@ -68,6 +68,10 @@ const CreateQuiz = () => {
       setQuiz(quiz.slice(0, -1));
     }
   };
+  
+  const handleTimerChange = (event) => {
+    setQuiz({ ...quiz, timer: event.target.value });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -137,8 +141,8 @@ const CreateQuiz = () => {
         </div>
       ))}
       <p>How much time should be allowed to take the quiz?</p>
-      <label for='timer'> Minutes</label>
-      <input type="number" min="1" id='timer' name='timer'/>
+      <label for='timer'>Minutes </label>
+      <input type="number" min="1" id='timer' name='timer' value={quiz.timer} onChange={handleTimerChange}/>
       <p></p>
       <button type="button" onClick={handleAddQuestion}>
         Add Question

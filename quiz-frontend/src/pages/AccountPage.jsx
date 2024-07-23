@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function AccountPage({employerID, setEmployerID}) {
     const navigateTo = useNavigate();
@@ -44,7 +45,8 @@ function AccountPage({employerID, setEmployerID}) {
             });
             if (response.status === 200) {
               console.log('Account deleted');
-              navigateTo("/")
+              setEmployerID(undefined)
+              navigateTo("/");
             }
 
           } catch (error) {

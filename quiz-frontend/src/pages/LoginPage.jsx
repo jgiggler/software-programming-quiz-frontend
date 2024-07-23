@@ -34,7 +34,7 @@ function LoginPage({employerID, setEmployerID}) {
       navigateTo('/');
     }
     else {
-      setEmployerID(undefined)
+      setEmployerID(undefined);
       navigateTo('/login')
     }
     } catch (error) 
