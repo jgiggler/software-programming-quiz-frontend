@@ -30,7 +30,7 @@ function App() {
       <Route path='/signup' element={<SignUpPage employerID={employerID} setEmployerID={setEmployerID}/>}/>
       <Route path='/account-settings' element={<AccountPage employerID={employerID} setEmployerID={setEmployerID}/>}/>
       <Route path='/quizzes' element={<QuizzesPage employerID={employerID} setEmployerID={setEmployerID}/>}/>
-      <Route path="/results" element={<ResultsPage/>} />
+      <Route path="/results" element={<ResultsPage employerID={employerID} setEmployerID={setEmployerID}/>} />
     </Routes>
     </main>
 

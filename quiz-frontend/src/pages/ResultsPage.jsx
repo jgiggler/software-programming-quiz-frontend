@@ -7,13 +7,13 @@ const resultsData = {
     grades: [0.95, 0.85]
   };
 
-const ResultsPage = () => {
+function ResultsPage({employerID, setEmployerID}){
   const query = new URLSearchParams(useLocation().search);
   const quizId = query.get('quiz_id');
   const employerId = query.get('employer_id');
 
   const { candidate_email, grades } = resultsData;
-
+  if (employerID != undefined) {
   return (
     <div>
       <h2>Results for Quiz {quizId}</h2>
@@ -36,6 +36,7 @@ const ResultsPage = () => {
       </table>
     </div>
   );
+  }
 };
 
 export default ResultsPage;
