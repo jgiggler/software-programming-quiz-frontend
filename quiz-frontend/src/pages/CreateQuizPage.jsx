@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function CreateQuiz({employerID, setEmployerID}){
+  const navigateTo = useNavigate();
   const initialQuestionState = () => ({
     question: '',
     type: 'multiple-choice',
@@ -81,12 +83,15 @@ function CreateQuiz({employerID, setEmployerID}){
     if (confirmCreate) {
       event.preventDefault();
       console.log(quiz);
+      navigateTo('/')
     }
     
   };
 
   if (employerID != undefined) {
     return (
+      <>
+      <h2>Create a Quiz</h2>
       <form className="quiz-form" onSubmit={handleSubmit}>
         <label className="form-label">Quiz Name: <input className="form-input" type="text" value={quiz.title} onChange={handleTitleChange}></input></label>
         <label className="form-label">Quiz Description: <input className="form-input" type="text" value={quiz.description} onChange={handleDescriptionChange}></input></label>
@@ -170,6 +175,7 @@ function CreateQuiz({employerID, setEmployerID}){
         
         <button className="button" type="submit">Create Quiz</button>
       </form>
+      </>
     );
   }
 }

@@ -5,14 +5,17 @@ import quizLogo from '/quiz_logo.jfif';
 function Nav({employerID, setEmployerID, candidateID, setCandidateID}) {
     const navigateTo = useNavigate()
     const handleLogout = () => {
-        setEmployerID(undefined)
-        navigateTo('/')
-      };
-      const handleReset = () => {
+        const confirmLogout = window.confirm("Are you sure you want to logout?")
+        if (confirmLogout){
+            setEmployerID(undefined)
+            navigateTo('/')
+        }
+    };
+    const handleReset = () => {
         setEmployerID(undefined)
         setCandidateID(undefined)
         navigateTo('/')
-      };
+    };
     if (employerID == undefined && candidateID == undefined){
         return (
         <nav className='sidebar'>

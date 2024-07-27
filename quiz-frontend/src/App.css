@@ -102,27 +102,26 @@ tr:nth-child(even) {
   background-color: rgb(31, 29, 29);
 }
 .quiz-form {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   padding: 20px;
   background: linear-gradient(200deg,black, black, rgb(38, 0, 63));
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+margin-bottom: 2%;
 }
 
 .form-label {
   display: block;
   margin-bottom: 8px;
   text-align: left;
-  
 }
 
 .form-input {
-  
   width: 100%;
   padding: 8px;
   margin-bottom: 8px;
-  border: 1px solid #ccc;
+  border: 2px solid black;
   border-radius: 4px;
 }
 
@@ -130,7 +129,7 @@ tr:nth-child(even) {
   width: 100%;
   padding: 8px;
   margin-bottom: 8px;
-  border: 1px solid #ccc;
+  border:2px solid black;
   border-radius: 4px;
 }
 
@@ -139,16 +138,14 @@ tr:nth-child(even) {
   padding: 20px;
   background: linear-gradient(200deg,rgb(35, 14, 56), rgb(30, 29, 90), rgb(32, 21, 73));
   border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .button {
   display: inline-block;
   padding: 10px 20px;
-  margin-top: 10px;
   background-color: #007bff;
-  color: white;
-  border: none;
+  color: black;
+  border: black 1 solid;
   border-radius: 4px;
   cursor: pointer;
 }

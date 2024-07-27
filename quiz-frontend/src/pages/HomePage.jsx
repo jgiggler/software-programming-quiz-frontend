@@ -28,10 +28,9 @@ function HomePage({employerID, setEmployerID}) {
     return (
       <>
     <h2>Homepage</h2>
-    <p>
-    A website for testing incoming employment candidates.
-    </p>
-    <p>Welcome Employer #{employerID}</p>
+
+    <h3>Welcome Employer #{employerID}</h3>
+    <p>Use the tab on the left to create a quiz, view existing quizzes you have made or update your account information.</p>
     </>
     )
   }
