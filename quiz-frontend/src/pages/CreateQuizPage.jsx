@@ -93,13 +93,13 @@ function CreateQuiz({employerID, setEmployerID}){
       <>
       <h2>Create a Quiz</h2>
       <form className="quiz-form" onSubmit={handleSubmit}>
-        <label className="form-label">Quiz Name: <input className="form-input" type="text" value={quiz.title} onChange={handleTitleChange}></input></label>
+        <label className="form-label">Quiz Name: <input className="form-input" type="text" value={quiz.title} onChange={handleTitleChange} ></input></label>
         <label className="form-label">Quiz Description: <input className="form-input" type="text" value={quiz.description} onChange={handleDescriptionChange}></input></label>
         {quiz.questions.map((q, qIndex) => (
           <div key={qIndex} className="question-section">
             <label className="form-label">
               Type:
-              <select className="form-select" value={q.type} onChange={(e) => handleTypeChange(qIndex, e)}>
+              <select className="form-type" value={q.type} onChange={(e) => handleTypeChange(qIndex, e)}>
                 <option value="multiple-choice">Multiple Choice</option>
                 <option value="select-all">Select All</option>
                 <option value="true-false">True/False</option>

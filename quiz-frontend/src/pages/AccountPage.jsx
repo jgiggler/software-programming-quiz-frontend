@@ -58,6 +58,7 @@ function AccountPage({employerID, setEmployerID}) {
   if (employerID != undefined){
     return (
         <>
+      <div className='account-settings-container'>
     <h2>Account Settings</h2>
       <p>
         What would you like to do with your account?
@@ -66,19 +67,20 @@ function AccountPage({employerID, setEmployerID}) {
       <form onSubmit={handleUpdate}>
         <div>
           <label>Email:</label>
-          <input type="email" name="email" value={userDetails.email} onChange={handleChange} />
+          <input type="email" name="email" placeholder="you@example.com" value={userDetails.email} onChange={handleChange} />
         </div>
         <div>
           <label>Password:</label>
-          <input type="password" name="password" value={userDetails.password} onChange={handleChange} />
+          <input type="password" name="password" placeholder="new password" value={userDetails.password} onChange={handleChange} />
         </div>
-        <button type="submit">Update</button>
+        <button className='update' type="submit">Update Account</button>
       </form>
       <p>Delete Account</p>
-      <button className='login-stack' onClick={handleDelete} style={{ marginTop: '20px', color: 'red' }}>Delete Account</button>
+      <button className='delete' onClick={handleDelete} >Delete Account</button>
+      </div>
       
-      
-        </>
+      </>
+
     )
   }
 }

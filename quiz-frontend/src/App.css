@@ -30,6 +30,51 @@
 .sidebar a:hover {
     color: #f1f1f1;
   }
+.delete {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 10px 20%;
+  background: linear-gradient(150deg,pink,rgb(255, 106, 106), pink);
+  color: red;
+  font-size: 18px;
+  border: black 1 solid;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.delete:hover {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 10px 20%;
+  background: linear-gradient(150deg,pink,rgb(128, 0, 0), pink);
+  color: black;
+  font-size: 18px;
+  border: black 1 solid;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.update {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 10px 20%;
+  
+  background: linear-gradient(150deg,blue,rgb(127, 99, 253));
+  color: black;
+  font-size: 18px;
+  border: black 1 solid;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.update:hover {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 10px 20%;
+  background: linear-gradient(150deg,cyan, black);
+  color: black;
+  font-size: 18px;
+  border: black 1 solid;
+  border-radius: 4px;
+  cursor: pointer;
+}
 body {
     background-color: #111;
     min-height: 100vh;
@@ -46,6 +91,25 @@ body {
 
 .logout {
     margin-top: 10px;
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(150deg,cyan,rgb(27, 3, 54));
+    color: black;
+    font-size: 18px;
+    border: black 1 solid;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.logout:hover {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(150deg,purple,rgb(27, 3, 54));
+  color: black;
+  font-size: 18px;
+  border: black 1 solid;
+  border-radius: 4px;
+  cursor: pointer;
 }
 .sidebar a {
     font-size: 25px;
@@ -59,6 +123,50 @@ body {
 }
 .sidebar .socials {
     font-size: 15px;
+}
+.account-settings-container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: black;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+input[type="email"],
+input[type="password"] {
+  display:flexbox;
+  margin: 10px;
+
+  
+  padding: 10px;
+  border: 2px solid purple;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.login{
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(150deg,cyan,rgb(27, 3, 54));
+  color: black;
+  font-size: 18px;
+  border: black 1 solid;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.login:hover {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  
+  padding: 10px 20px;
+  background: linear-gradient(150deg,purple,rgb(27, 3, 54));
+  color: black;
+  font-size: 18px;
+  border: black 1 solid;
+  border-radius: 4px;
+  cursor: pointer;
 }
 h1 {
   font-family: 'Impact', sans-serif;
@@ -107,8 +215,7 @@ tr:nth-child(even) {
   padding: 20px;
   background: linear-gradient(200deg,black, black, rgb(38, 0, 63));
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-margin-bottom: 2%;
+  margin-bottom: 2%;
 }
 
 .form-label {
@@ -126,11 +233,22 @@ margin-bottom: 2%;
 }
 
 .form-select {
-  width: 100%;
+  cursor: pointer;
+  width: 60%;
   padding: 8px;
   margin-bottom: 8px;
   border:2px solid black;
   border-radius: 4px;
+  background-color: greenyellow;
+}
+.form-type {
+  cursor: pointer;
+  width: 60%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border:2px solid black;
+  border-radius: 4px;
+  background-color: rgb(226, 255, 226);
 }
 
 .question-section {

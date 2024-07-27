@@ -19,7 +19,7 @@ function HomePage({employerID, setEmployerID}) {
         A website for testing incoming employment candidates.
       </p>
       <p>All you have to do is create a quiz then you can send a quiz link to any candidate</p>
-      <p>To get started <button className='login-stack' onClick={login}>Login</button> or <button className='login-stack' onClick={signup}>Sign Up</button> right now!</p>
+      <p>To get started <button className='login' onClick={login}>Login</button> or <button className='login' onClick={signup}>Sign Up</button> right now!</p>
       
         </>
 

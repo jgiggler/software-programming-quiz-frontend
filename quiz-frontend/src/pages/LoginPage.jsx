@@ -71,8 +71,8 @@ function LoginPage({employerID, setEmployerID}) {
           />
         </div>
         <div className='login-stack'>
-        <button className='login-stack' type="submit" onClick={handleSubmit}>Login</button>
-        <button className='login-stack' onClick={signup}>Create an Account</button>
+        <button className='login' type="submit" onClick={handleSubmit}>Login</button>
+        <button className='login' onClick={signup}>Create an Account</button>
         </div>
       </form>
       <p>
