@@ -5,19 +5,28 @@ const quizData = {
     title: "Title of Quiz",
     description: "Description of quiz",
     timer: 1, // Timer in minutes
-    0: {
+    questions:[
+      {
       answers: ['cat', 'dog', 'bear', 'meow'],
       correct_answers: [1],
       question_text: "Question 1",
       question_type: "multiple-choice"
-    },
-    1: {
+      },
+      {
       answers: ['apple', 'banana', 'cherry', 'date'],
-      correct_answers: [2],
+      correct_answers: [2,3],
       question_text: "Question 2",
-      question_type: "multiple-choice"
+      question_type: "select-all"
+    },
+    {
+      answers: ['u', 'x', 'y', 'z'],
+      correct_answers: [2,3],
+      question_text: "Question 3",
+      question_type: "free-form"
     }
-  };
+
+  ]
+};
   
   const Quiz = ({ data, onSubmit }) => {
     const [answers, setAnswers] = useState({});
@@ -36,10 +45,10 @@ const quizData = {
       return () => clearInterval(timer);
     }, [timeLeft, submitted]);
   
-    const handleChange = (questionIndex, answerIndex) => {
+    const handleChange = (questionIndex, answer) => {
       setAnswers({
         ...answers,
-        [questionIndex]: answerIndex
+        [questionIndex]: answer
       });
     };
   
@@ -64,34 +73,79 @@ const quizData = {
   
     return (
       <div>
-        
-        <div>Time Left: {formatTime(timeLeft)}</div>
-        <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-          {Object.keys(data).filter(key => !isNaN(key)).map(key => {
-            const question = data[key];
-            return (
-              <div key={key}>
-                <h2>{question.question_text}</h2>
-                {question.answers.map((answer, index) => (
-                  <div key={index}>
-                    <label>
-                      <input
-                        type="radio"
-                        name={`question-${key}`}
-                        value={index}
-                        checked={answers[key] === index}
-                        onChange={() => handleChange(key, index)}
-                      />
-                      {answer}
-                    </label>
-                  </div>
-                ))}
+      <div>Time Left: {formatTime(timeLeft)}</div>
+      <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+        {data.questions.map((question, index) => (
+          <div key={index}>
+            <h2>{question.question_text}</h2>
+            {question.question_type === 'multiple-choice' && question.answers.map((answer, idx) => (
+              <div key={idx}>
+                <label>
+                  <input
+                    type="radio"
+                    name={`question-${index}`}
+                    value={idx}
+                    checked={answers[index] === idx}
+                    onChange={() => handleChange(index, idx)}
+                  />
+                  {answer}
+                </label>
               </div>
-            );
-          })}
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+            ))}
+            {question.question_type === 'select-all' && question.answers.map((answer, idx) => (
+              <div key={idx}>
+                <label>
+                  <input
+                    type="checkbox"
+                    name={`question-${index}`}
+                    value={idx}
+                    checked={Array.isArray(answers[index]) && answers[index].includes(idx)}
+                    onChange={(e) => {
+                      const newAnswers = Array.isArray(answers[index]) ? [...answers[index]] : [];
+                      if (e.target.checked) {
+                        newAnswers.push(idx);
+                      } else {
+                        const answerIndex = newAnswers.indexOf(idx);
+                        newAnswers.splice(answerIndex, 1);
+                      }
+                      handleChange(index, newAnswers);
+                    }}
+                  />
+                  {answer}
+                </label>
+              </div>
+            ))}
+            {question.question_type === 'true-false' && ['True', 'False'].map((answer, idx) => (
+              <div key={idx}>
+                <label>
+                  <input
+                    type="radio"
+                    name={`question-${index}`}
+                    value={idx}
+                    checked={answers[index] === idx}
+                    onChange={() => handleChange(index, idx)}
+                  />
+                  {answer}
+                </label>
+              </div>
+            ))}
+            {question.question_type === 'free-form' && (
+              <div>
+                <label>
+                  <input
+                    type="text"
+                    name={`question-${index}`}
+                    value={answers[index] || ''}
+                    onChange={(e) => handleChange(index, e.target.value)}
+                  />
+                </label>
+              </div>
+            )}
+          </div>
+        ))}
+        <button type="submit">Submit</button>
+      </form>
+    </div>
     );
   };
   

@@ -6,6 +6,7 @@ function AccountPage({employerID, setEmployerID}) {
     const navigateTo = useNavigate();
     const [userDetails, setUserDetails] = useState({
         email: '',
+        employer_id: employerID,
         password: '',
       });
     useEffect(() => {
@@ -13,6 +14,7 @@ function AccountPage({employerID, setEmployerID}) {
         // For demonstration, assuming user details are hardcoded
         setUserDetails({
           email: '',
+          employer_id: employerID,
           password: '',
         });
       }, []);
