@@ -2,33 +2,34 @@ import React, { useState, useEffect } from 'react';
 
 const quizData = {
     employer_id: "4103",
+    quiz_id : 123,
     title: "Title of Quiz",
     description: "Description of quiz",
     timer: 1, // Timer in minutes
     questions:[
       {
       answers: ['cat', 'dog', 'bear', 'meow'],
-      correct_answers: [1],
       question_text: "Question 1",
       question_type: "multiple-choice"
       },
       {
       answers: ['apple', 'banana', 'cherry', 'date'],
-      correct_answers: [2,3],
       question_text: "Question 2",
       question_type: "select-all"
     },
     {
       answers: ['u', 'x', 'y', 'z'],
-      correct_answers: [2,3],
       question_text: "Question 3",
       question_type: "free-form"
+    },
+    {
+      question_text: "Question 4",
+      question_type: "true-false"
     }
-
   ]
 };
   
-  const Quiz = ({ data, onSubmit }) => {
+  const Quiz = ({ data, candidateID }) => {
     const [answers, setAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [timeLeft, setTimeLeft] = useState(data.timer * 60);
@@ -52,9 +53,37 @@ const quizData = {
       });
     };
   
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
       setSubmitted(true);
-      onSubmit(answers);
+      console.log({
+        quiz_id: quizData.quiz_id,
+        candidateID: candidateID,
+        quizData: answers,
+      })
+      try {
+        const response = await fetch('http://127.0.0.1:4546/submit-quiz', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            quiz_id: quizData.quiz_id,
+            candidateID: candidateID,
+            quizData: answers,
+          }),
+        });
+        
+        const data = await response.json();
+        console.log(data)
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+    
+        const result = await response.json();
+        console.log('Quiz submitted successfully:', result);
+      } catch (error) {
+        console.error('Error submitting quiz:', error);
+      }
     };
   
     const formatTime = (seconds) => {
@@ -156,16 +185,13 @@ function TakeQuizPage({candidateID, setCandidateID}) {
     const handleShowQuiz = () => {
       setShowQuiz(true);
     };
-  
-    const handleQuizSubmit = (answers) => {
-      console.log('Quiz submitted:', answers);
-    };
+    
     if (candidateID != undefined){
     return (
       <div>
         
         {showQuiz ? (
-          <Quiz data={quizData} onSubmit={handleQuizSubmit} />
+          <Quiz data={quizData} candidateID={candidateID} />
         ) : (
             <>
             <h2>{quizData.title}</h2>

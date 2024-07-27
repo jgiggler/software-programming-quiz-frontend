@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import EmailListComponent from '../components/emailList';
 
 function QuizzesPage({employerID, setEmployerID}) {
   const [quizzes, setQuizzes] = useState({
@@ -8,31 +9,24 @@ function QuizzesPage({employerID, setEmployerID}) {
     title: ["my quiz", "quiz1", "EpicQuiz"],
     description: ["first quiz", "my description", "this will be epic"]
   });
-  const navigateTo = useNavigate();
   
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log('Form submitted with:', formData);
-    try{
-      const response = await fetch('http://127.0.0.1:4546/quizzes', {method: 'POST',
-                                                  headers: {'Content-Type': 'application/json'},
-                                                  body: JSON.stringify(formData),});
-    
-    const data = await response.json();
-    console.log(data.message)
-  
-    if (response.status ===200){
-      setEmployerID(data.employer_id);
-      navigateTo('/');
-    }
-    else {
-      setEmployerID(undefined)
-      navigateTo('/login')
-    }
-    } catch (error) 
-      {console.error('Login failed:', error);
-    }
-  };
+  // const [quizzes, setQuizzes] = useState(null);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:4546/quizzes/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(employerID),
+    })
+      .then(response => response.json())
+      .then(data => setQuizzes(data))
+      .catch(error => console.error('Error fetching quizzes:', error));
+  }, []);
+
+
+ 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this quiz?")
      if (confirmDelete){
@@ -63,8 +57,19 @@ function QuizzesPage({employerID, setEmployerID}) {
       }
      }    
   };
+  const [currentQuizId, setCurrentQuizId] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleFormVisibility = (id) => {
+    setShowForm(!showForm);
+    setCurrentQuizId(id);
+  };
+  //RETURN
 
   if (employerID != undefined){
+    if (!quizzes) {
+      return <div>Loading quizzes...</div>;
+    }
     return (
     <>
     <div>
@@ -90,12 +95,16 @@ function QuizzesPage({employerID, setEmployerID}) {
               <td>{quizzes.title[index]}</td>
               <td>{quizzes.description[index]}</td>
               <td><Link to={`/results?quiz_id=${id}&employer_id=${employerID}`}>View Results</Link></td>
+              <td><button onClick={() => toggleFormVisibility(id)} >Send Quiz {id} to Candidates</button></td>
               <td><button onClick={() => handleDelete(id)}>Delete Quiz</button></td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
+    {showForm && currentQuizId && (
+        <EmailListComponent quizId={currentQuizId} toggleFormVisibility={toggleFormVisibility} />
+      )}
     </div>
     </>
     )
