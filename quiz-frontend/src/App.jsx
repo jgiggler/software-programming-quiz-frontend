@@ -13,7 +13,7 @@ import ResultsPage from './pages/ResultsPage';
 import TakeQuizPage from './pages/TakeQuizPage';
 
 function App() {
-  const [employerID, setEmployerID] = useState(undefined)
+  const [employerID, setEmployerID] = useState(1)
   const [candidateID, setCandidateID] = useState(undefined)
   return (
     <>

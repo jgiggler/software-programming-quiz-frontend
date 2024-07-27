@@ -27,7 +27,7 @@ function AccountPage({employerID, setEmployerID}) {
         }));
     };
     const handleUpdate = async (e) => {
-        
+        e.preventDefault();
         const confirmUpdate = window.confirm("Are you sure you want to update your account details?");
         if (confirmUpdate) {
           try {
