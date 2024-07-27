@@ -9,6 +9,7 @@ function AccountPage({employerID, setEmployerID}) {
         employer_id: employerID,
         password: '',
       });
+    const [updateMessage, setUpdateMessage] = useState(undefined)
     useEffect(() => {
         // Fetch user details from the backend API and set the state
         // For demonstration, assuming user details are hardcoded
@@ -43,7 +44,7 @@ function AccountPage({employerID, setEmployerID}) {
       
             if (response.ok) {
               console.log('Update successful:', data);
-              navigateTo('/account-settings')
+              setUpdateMessage(data.message)
             } else {
               console.error('Update failed:', data);
               // Handle error, e.g., show an error message
@@ -82,6 +83,11 @@ function AccountPage({employerID, setEmployerID}) {
         What would you like to do with your account?
       </p>
       <p>Update Account</p>
+      {updateMessage && (
+                <div>
+                <p>{updateMessage}</p>
+                </div>
+            )}
       <form onSubmit={handleUpdate}>
         <div>
           <label>Email:</label>
