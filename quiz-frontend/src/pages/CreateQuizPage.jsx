@@ -57,9 +57,21 @@ function CreateQuiz({employerID, setEmployerID}){
 
   const handleCorrectAnswerChange = (qIndex, event) => {
     const newQuiz = [...quiz.questions];
-    const value = event.target.value;
-    newQuiz[qIndex].correctAnswers[0] = isNaN(value) ? value : Number(value);
-    
+    const value = Number(event.target.value);
+    const correctAnswers = newQuiz[qIndex].correctAnswers;
+
+    if (newQuiz[qIndex].type === 'select-all') {
+      if (event.target.checked) {
+        correctAnswers.push(value);
+      } else {
+        const index = correctAnswers.indexOf(value);
+        if (index > -1) {
+          correctAnswers.splice(index, 1);
+        }
+      }
+    } else {
+      newQuiz[qIndex].correctAnswers = [value];
+    }
     setQuiz({ ...quiz, questions: newQuiz });
   };
 

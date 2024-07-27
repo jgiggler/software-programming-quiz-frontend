@@ -113,28 +113,28 @@ const quizData = {
                   <input
                     type="radio"
                     name={`question-${index}`}
-                    value={idx}
-                    checked={answers[index] === idx}
-                    onChange={() => handleChange(index, idx)}
+                    value={answer}
+                    checked={answers[index] === answer}
+                    onChange={() => handleChange(index, answer)}
                   />
                   {answer}
                 </label>
               </div>
             ))}
-            {question.question_type === 'select-all' && question.answers.map((answer, idx) => (
+             {question.question_type === 'select-all' && question.answers.map((answer, idx) => (
               <div key={idx}>
                 <label>
                   <input
                     type="checkbox"
                     name={`question-${index}`}
-                    value={idx}
-                    checked={Array.isArray(answers[index]) && answers[index].includes(idx)}
+                    value={answer}
+                    checked={Array.isArray(answers[index]) && answers[index].includes(answer)}
                     onChange={(e) => {
                       const newAnswers = Array.isArray(answers[index]) ? [...answers[index]] : [];
                       if (e.target.checked) {
-                        newAnswers.push(idx);
+                        newAnswers.push(answer);
                       } else {
-                        const answerIndex = newAnswers.indexOf(idx);
+                        const answerIndex = newAnswers.indexOf(answer);
                         newAnswers.splice(answerIndex, 1);
                       }
                       handleChange(index, newAnswers);
@@ -150,9 +150,9 @@ const quizData = {
                   <input
                     type="radio"
                     name={`question-${index}`}
-                    value={idx}
-                    checked={answers[index] === idx}
-                    onChange={() => handleChange(index, idx)}
+                    value={answer}
+                    checked={answers[index] === answer}
+                    onChange={() => handleChange(index, answer)}
                   />
                   {answer}
                 </label>
