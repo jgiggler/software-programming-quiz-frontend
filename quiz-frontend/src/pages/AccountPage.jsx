@@ -43,7 +43,7 @@ function AccountPage({employerID, setEmployerID}) {
       
             if (response.ok) {
               console.log('Update successful:', data);
-              // Handle success, e.g., show a success message or redirect
+              navigateTo('/account-settings')
             } else {
               console.error('Update failed:', data);
               // Handle error, e.g., show an error message
