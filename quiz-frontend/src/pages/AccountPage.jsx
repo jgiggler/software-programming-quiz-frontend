@@ -27,15 +27,31 @@ function AccountPage({employerID, setEmployerID}) {
         }));
     };
     const handleUpdate = async (e) => {
+        
         const confirmUpdate = window.confirm("Are you sure you want to update your account details?");
         if (confirmUpdate) {
-        try {
-            const response = await axios.put('http://127.0.0.1:4546/update-user', userDetails);
-            console.log('Updated details:', response.data);
-        } catch (error) {
-            console.error('Error updating details:', error);
-        }
-        }
+          try {
+            const response = await fetch('http://127.0.0.1:4546/update-user', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(userDetails),
+            });
+      
+            const data = await response.json();
+      
+            if (response.ok) {
+              console.log('Update successful:', data);
+              // Handle success, e.g., show a success message or redirect
+            } else {
+              console.error('Update failed:', data);
+              // Handle error, e.g., show an error message
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        };
     };
 
     const handleDelete = async () => {
