@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import Message from '../components/invalid-login-message';
 
 function LoginPage({employerID, setEmployerID}) {
   const navigateTo = useNavigate();
-
+  const [isCorrect, setIsCorrect] = useState(undefined)
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -20,7 +21,6 @@ function LoginPage({employerID, setEmployerID}) {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted with:', formData);
     try{
       const response = await fetch('http://127.0.0.1:4546/login', {method: 'POST',
                                                   headers: {'Content-Type': 'application/json'},
@@ -31,11 +31,13 @@ function LoginPage({employerID, setEmployerID}) {
   
     if (response.status ===200){
       setEmployerID(data.employer_id);
+      setIsCorrect(undefined)
       navigateTo('/');
     }
     else {
       setEmployerID(undefined);
-      navigateTo('/login')
+      setIsCorrect(false)
+
     }
     } catch (error) 
       {console.error('Login failed:', error);
@@ -70,6 +72,7 @@ function LoginPage({employerID, setEmployerID}) {
             onChange={handleChange} 
           />
         </div>
+        {!isCorrect && <Message isCorrect={isCorrect}/>}
         <div className='login-stack'>
         <button className='login' type="submit" onClick={handleSubmit}>Login</button>
         <button className='login' onClick={signup}>Create an Account</button>

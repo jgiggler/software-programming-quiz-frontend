@@ -36,7 +36,7 @@ const EmailListComponent = ({ quizId, toggleFormVisibility }) => {
         </div>
         ))}
         <button onClick={handleAddEmail}>Add Another Email</button>
-        <button onClick={handleSendEmails}>Send Quiz ID</button>
+        <button onClick={handleSendEmails}>Send Quiz</button>
     </div>   
   );
 };

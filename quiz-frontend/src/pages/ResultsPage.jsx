@@ -7,36 +7,62 @@ const resultsData = {
     grades: [0.95, 0.85]
   };
 
-function ResultsPage({employerID, setEmployerID}){
+function ResultsPage({employerID}){
+  const [resultsData, setResultsData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const query = new URLSearchParams(useLocation().search);
   const quizId = query.get('quiz_id');
-  const employerId = query.get('employer_id');
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:4546/quiz-results?quiz_id=${quizId}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setResultsData(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchResults();
+  }, [quizId]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!resultsData || employerID === undefined) return null;
 
   const { candidate_email, grades } = resultsData;
-  if (employerID != undefined) {
+
   return (
     <div>
       <h2>Results for Quiz {quizId}</h2>
-
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Candidate Email</th>
-            <th>Grade</th>
-          </tr>
-        </thead>
-        <tbody>
-          {candidate_email.map((email, index) => (
-            <tr key={index}>
-              <td>{email}</td>
-              <td>{grades[index]}</td>
+      <div className='table-container'>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Candidate Email</th>
+              <th>Grade</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {candidate_email.map((email, index) => (
+              <tr key={index}>
+                <td>{email}</td>
+                <td>{grades[index]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
-  }
-};
+}
+
 
 export default ResultsPage;

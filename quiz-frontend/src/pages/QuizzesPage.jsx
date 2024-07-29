@@ -4,26 +4,35 @@ import { Link } from 'react-router-dom';
 import EmailListComponent from '../components/emailList';
 
 function QuizzesPage({employerID, setEmployerID}) {
+  // const [quizzes, setQuizzes] = useState({
+  //   quiz_id: [1, 24, 54],
+  //   title: ["my quiz", "quiz1", "EpicQuiz"],
+  //   description: ["first quiz", "my description", "this will be epic"]
+  // });
+  
   const [quizzes, setQuizzes] = useState({
-    quiz_id: [1, 24, 54],
-    title: ["my quiz", "quiz1", "EpicQuiz"],
-    description: ["first quiz", "my description", "this will be epic"]
+    quiz_id: [],
+    title: [],
+    description:[]
   });
   
-  // const [quizzes, setQuizzes] = useState(null);
-
   useEffect(() => {
-    fetch('http://127.0.0.1:4546/quizzes/', {
+    const employer_id = {'employer_id': employerID}
+    fetch('http://127.0.0.1:4546/user-quiz', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(employerID),
+      body: JSON.stringify(employer_id),
     })
       .then(response => response.json())
-      .then(data => setQuizzes(data))
+      
+      .then(data => setQuizzes(data.quizzes))
+      
       .catch(error => console.error('Error fetching quizzes:', error));
-  }, []);
+  }, [employerID]);
+  
+  console.log("quizzes =", quizzes)
 
 
  
@@ -89,16 +98,30 @@ function QuizzesPage({employerID, setEmployerID}) {
           </tr>
         </thead>
         <tbody>
-          {quizzes.quiz_id.map((id, index) => (
-            <tr key={id}>
-              <td>{id}</td>
-              <td>{quizzes.title[index]}</td>
-              <td>{quizzes.description[index]}</td>
-              <td><Link to={`/results?quiz_id=${id}&employer_id=${employerID}`}>View Results</Link></td>
-              <td><button onClick={() => toggleFormVisibility(id)} >Send Quiz {id} to Candidates</button></td>
-              <td><button onClick={() => handleDelete(id)}>Delete Quiz</button></td>
+        {quizzes.length > 0 ? (
+          quizzes.map((quiz) => (
+            <tr key={quiz.quiz_id}>
+              <td>{quiz.quiz_id}</td>
+              <td>{quiz.title}</td>
+              <td>{quiz.description}</td>
+              <td>
+                <Link to={`/results?quiz_id=${quiz.quiz_id}&employer_id=${employerID}`}>View Results</Link>
+              </td>
+              <td>
+                <button onClick={() => toggleFormVisibility(quiz.quiz_id)}>
+                  Send Quiz {quiz.quiz_id} to Candidates
+                </button>
+              </td>
+              <td>
+                <button onClick={() => handleDelete(quiz.quiz_id)}>Delete Quiz</button>
+              </td>
             </tr>
-          ))}
+          ))
+        ) : (
+          <tr>
+            <td colSpan="6">No quizzes available.</td>
+          </tr>
+        )}
         </tbody>
       </table>
     </div>

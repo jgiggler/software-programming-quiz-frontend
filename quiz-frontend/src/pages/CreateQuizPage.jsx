@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function CreateQuiz({employerID, setEmployerID}){
   const navigateTo = useNavigate();
@@ -90,12 +91,20 @@ function CreateQuiz({employerID, setEmployerID}){
     setQuiz({ ...quiz, timer: event.target.value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const confirmCreate = window.confirm("Are you sure you want to submit the quiz as is?")
     if (confirmCreate) {
-      event.preventDefault();
+      try {
+        const response = await axios.post('http://127.0.0.1:4546/create-quiz', quiz);
+        console.log(response.data);
+        
+      } catch (error) {
+        console.error('There was an error creating the quiz!', error);
+      }
+      
       console.log(quiz);
-      navigateTo('/')
+      navigateTo('/quizzes')
     }
     
   };
