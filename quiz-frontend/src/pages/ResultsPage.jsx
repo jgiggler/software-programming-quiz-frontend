@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 
 const resultsData = {
@@ -17,7 +17,13 @@ function ResultsPage({employerID}){
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:4546/quiz-results?quiz_id=${quizId}`);
+        const response = await fetch(`http://127.0.0.1:4546/quiz-results`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({quiz_id: quizId, employer_id: employerID}),
+        });
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -31,11 +37,11 @@ function ResultsPage({employerID}){
     };
 
     fetchResults();
-  }, [quizId]);
+  }, [quizId, employerID]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
-  if (!resultsData || employerID === undefined) return null;
+  if (!resultsData || !resultsData.candidate_email || !resultsData.grades) return <div>No data available</div>;
 
   const { candidate_email, grades } = resultsData;
 
@@ -51,12 +57,18 @@ function ResultsPage({employerID}){
             </tr>
           </thead>
           <tbody>
-            {candidate_email.map((email, index) => (
-              <tr key={index}>
-                <td>{email}</td>
-                <td>{grades[index]}</td>
+          {(candidate_email.length > 0 && grades.length > 0) ? (
+              candidate_email.map((email, index) => (
+                <tr key={index}>
+                  <td>{email}</td>
+                  <td>{grades[index]}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="2">No data available</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

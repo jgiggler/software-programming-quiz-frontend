@@ -14,6 +14,7 @@ function CreateQuiz({employerID, setEmployerID}){
   const [quiz, setQuiz] = useState({
     title: '',
     description: '',
+    employer_id: employerID,
     questions: [initialQuestionState()],
     timer: 1
   });
@@ -100,7 +101,7 @@ function CreateQuiz({employerID, setEmployerID}){
         console.log(response.data);
         
       } catch (error) {
-        console.error('There was an error creating the quiz!', error);
+        console.error(error.response.data);
       }
       
       console.log(quiz);
