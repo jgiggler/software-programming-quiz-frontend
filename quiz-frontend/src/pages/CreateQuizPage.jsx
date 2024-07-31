@@ -115,8 +115,8 @@ function CreateQuiz({employerID, setEmployerID}){
       <>
       <h2>Create a Quiz</h2>
       <form className="quiz-form" onSubmit={handleSubmit}>
-        <label className="form-label">Quiz Name: <input className="form-input" type="text" value={quiz.title} onChange={handleTitleChange} ></input></label>
-        <label className="form-label">Quiz Description: <input className="form-input" type="text" value={quiz.description} onChange={handleDescriptionChange}></input></label>
+        <label className="form-label">Quiz Name: <input className="form-input" type="text" value={quiz.title} onChange={handleTitleChange} required></input></label>
+        <label className="form-label">Quiz Description: <input className="form-input" type="text" value={quiz.description} onChange={handleDescriptionChange} required></input></label>
         {quiz.questions.map((q, qIndex) => (
           <div key={qIndex} className="question-section">
             <label className="form-label">
@@ -130,7 +130,7 @@ function CreateQuiz({employerID, setEmployerID}){
             </label>
             <label className="form-label">
               Question {qIndex + 1}:
-              <input className="form-input" type="text" value={q.question} onChange={(e) => handleQuestionChange(qIndex, e)} />
+              <input className="form-input" type="text" value={q.question} onChange={(e) => handleQuestionChange(qIndex, e)} required />
             </label>
             
             {q.type !== 'free-form' && q.answers.map((answer, aIndex) => (
@@ -143,6 +143,7 @@ function CreateQuiz({employerID, setEmployerID}){
                     value={answer}
                     onChange={(e) => handleAnswerChange(qIndex, aIndex, e)}
                     disabled={q.type === 'true-false'}
+                    required
                   />
                 </label>
               </div>
