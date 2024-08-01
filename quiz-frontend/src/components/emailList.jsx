@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const EmailListComponent = ({ quizId, toggleFormVisibility }) => {
   const [emails, setEmails] = useState(['']);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     // Check if all email fields are filled
@@ -19,14 +20,33 @@ const EmailListComponent = ({ quizId, toggleFormVisibility }) => {
     setEmails([...emails, '']);
   };
 
-  const handleSendEmails = () => {
+  const handleSendEmails = async () => {
     if (isFormValid) {
-      // Post to backend
-      console.log({ 'quiz_id': quizId, 'candidate_emails': emails });
-      alert(`Quiz ID ${quizId} sent to ${emails.join(', ')}`);
-      toggleFormVisibility(null);
+      try {
+        const response = await fetch('http://127.0.0.1:4546/send-quiz-link', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            quiz_id: quizId,
+            candidate_emails: emails,
+          }),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          setMessage(`Quiz ID ${quizId} sent to ${emails.join(', ')}`);
+          toggleFormVisibility(null);
+        } else {
+          setMessage('Failed to send emails. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error sending emails:', error);
+        setMessage('An error occurred. Please try again.');
+      }
     } else {
-      alert('Please fill out all email fields.');
+      setMessage('Please fill out all email fields.');
     }
   };
 
@@ -48,6 +68,7 @@ const EmailListComponent = ({ quizId, toggleFormVisibility }) => {
       <button onClick={handleSendEmails} disabled={!isFormValid}>
         Send Quiz
       </button>
+      {message && <p>{message}</p>}
     </div>
   );
 };
