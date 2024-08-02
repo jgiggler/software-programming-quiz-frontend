@@ -1,21 +1,36 @@
-import {React, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { React, useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import quizLogo from '/quiz_logo.jfif';
 
 function Nav({employerID, setEmployerID, candidateID, setCandidateID}) {
-    const navigateTo = useNavigate()
+    const navigateTo = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        if (candidateID !== undefined && location.pathname === '/show-quiz') {
+            const params = new URLSearchParams(location.search);
+            params.set('candidateID', candidateID);
+            const newPath = `${location.pathname}?${params.toString()}`;
+            if (location.search !== `?${params.toString()}`) {
+                navigateTo(newPath, { replace: true });
+            }
+        }
+    }, [candidateID, location.pathname, location.search, navigateTo]);
+
     const handleLogout = () => {
-        const confirmLogout = window.confirm("Are you sure you want to logout?")
+        const confirmLogout = window.confirm("Are you sure you want to logout?");
         if (confirmLogout){
-            setEmployerID(undefined)
-            navigateTo('/')
+            setEmployerID(undefined);
+            navigateTo('/');
         }
     };
+
     const handleReset = () => {
-        setEmployerID(undefined)
-        setCandidateID(undefined)
-        navigateTo('/')
+        setEmployerID(undefined);
+        setCandidateID(undefined);
+        navigateTo('/');
     };
+
     if (employerID == undefined && candidateID == undefined){
         return (
         <nav className='sidebar'>
@@ -41,7 +56,7 @@ function Nav({employerID, setEmployerID, candidateID, setCandidateID}) {
                 </div>
                 
                 <Link to="/">Home</Link>
-                <Link to="/show-quiz">Take Quiz</Link>
+                <Link to={`/show-quiz?candidateID=${candidateID}`}>Take Quiz</Link>
 
                 <div className='social-box'>
                     <a className="socials" href='http://twitter.com'>Twitter</a>
@@ -82,7 +97,7 @@ function Nav({employerID, setEmployerID, candidateID, setCandidateID}) {
                 </div>
                 <footer>&copy; CS 467</footer>
             </nav>
-            );
+        );
     }
 }
 

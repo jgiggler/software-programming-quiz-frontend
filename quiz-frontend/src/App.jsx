@@ -17,10 +17,7 @@ function App() {
     const savedEmployerID = localStorage.getItem('employerID');
     return savedEmployerID !== null ? JSON.parse(savedEmployerID) : undefined;
   });
-  const [candidateID, setCandidateID] = useState(() => {
-    const savedCandidateID = localStorage.getItem('candidateID');
-    return savedCandidateID !== null ? JSON.parse(savedCandidateID) : undefined;
-  });
+
   useEffect(() => {
     if (employerID !== undefined) {
       localStorage.setItem('employerID', JSON.stringify(employerID));
@@ -29,13 +26,8 @@ function App() {
     }
   }, [employerID]);
 
-  useEffect(() => {
-    if (candidateID !== undefined) {
-      localStorage.setItem('candidateID', JSON.stringify(candidateID));
-    } else {
-      localStorage.removeItem('candidateID');
-    }
-  }, [candidateID]);
+  const [candidateID, setCandidateID] = useState();
+
   return (
     <>
     <Router>
