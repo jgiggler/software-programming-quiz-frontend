@@ -37,7 +37,7 @@ const EmailListComponent = ({ quizId, toggleFormVisibility }) => {
         if (response.ok) {
           const result = await response.json();
           setMessage(`Quiz ID ${quizId} sent to ${emails.join(', ')}`);
-          toggleFormVisibility(null);
+          
         } else {
           setMessage('Failed to send emails. Please try again.');
         }

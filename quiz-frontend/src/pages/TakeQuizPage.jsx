@@ -2,43 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Quiz from '../components/quiz';
 
-const quizData = {
-  employer_id: "4103",
-  quiz_id: 123,
-  title: "Title of Quiz",
-  description: "Description of quiz",
-  timer: 1, // Timer in minutes
-  questions: [
-    {
-      answers: ['cat', 'dog', 'bear', 'meow'],
-      question_text: "Question 1",
-      question_type: "multiple-choice"
-    },
-    {
-      answers: ['apple', 'banana', 'cherry', 'date'],
-      question_text: "Question 2",
-      question_type: "select-all"
-    },
-    {
-      answers: ['u', 'x', 'y', 'z'],
-      question_text: "Question 3",
-      question_type: "free-form"
-    },
-    {
-      question_text: "Question 4",
-      question_type: "true-false"
-    }
-  ]
-};
-
-
 const TakeQuizPage = ({ candidateID, setCandidateID }) => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizData, setQuizData] = useState(null);
   const [quizCompleted, setQuizCompleted] = useState(false);
 
   const location = useLocation();
-  const navigateTo = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -46,9 +16,14 @@ const TakeQuizPage = ({ candidateID, setCandidateID }) => {
     
     if (id && id !== candidateID) {
       setCandidateID(id);
-      localStorage.setItem('candidateID', JSON.stringify(id));
+      localStorage.setItem('candidateID', id);
       fetchQuizData(id);
-      console.log(id)
+    } else {
+      const storedID = localStorage.getItem('candidateID');
+      if (storedID) {
+        setCandidateID(storedID);
+        fetchQuizData(storedID);
+      }
     }
   }, [location.search, candidateID]);
 
@@ -60,7 +35,6 @@ const TakeQuizPage = ({ candidateID, setCandidateID }) => {
       }
       const data = await response.json();
       setQuizData(data);
-      console.log(data); // Log the data here
       const quizStatus = JSON.parse(localStorage.getItem(`quizCompleted-${id}`));
       setQuizCompleted(quizStatus || false);
     } catch (error) {
@@ -72,7 +46,7 @@ const TakeQuizPage = ({ candidateID, setCandidateID }) => {
     setShowQuiz(true);
     localStorage.setItem(`quizStarted-${candidateID}`, JSON.stringify(true));
     localStorage.setItem(`startTime-${candidateID}`, new Date().toISOString());
-    navigateTo(`/show-quiz?candidateID=${candidateID}`);
+    navigate(`/show-quiz?candidateID=${candidateID}`);
   };
 
   if (!candidateID) {
@@ -83,7 +57,6 @@ const TakeQuizPage = ({ candidateID, setCandidateID }) => {
     return <div>You have already completed the quiz. Thank you!</div>;
   }
 
-  if (quizData !== null){
   return (
     <div>
       {showQuiz ? (
@@ -98,13 +71,6 @@ const TakeQuizPage = ({ candidateID, setCandidateID }) => {
       )}
     </div>
   );
-  } else {
-    return (
-      <div>
-        No quiz data
-      </div>
-    )
-  }
 };
 
 export default TakeQuizPage;

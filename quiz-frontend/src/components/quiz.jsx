@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 const Quiz = ({ data, candidateID }) => {
     const [answers, setAnswers] = useState(() => {
       const savedAnswers = localStorage.getItem(`answers-${candidateID}`);
@@ -47,12 +48,6 @@ const Quiz = ({ data, candidateID }) => {
       localStorage.removeItem(`answers-${candidateID}`);
       localStorage.removeItem(`timeLeft-${candidateID}`);
       localStorage.removeItem(`startTime-${candidateID}`);
-      console.log({
-        quiz_id: data.quiz_id,
-        employer_id: data.employer_id,
-        candidateID: candidateID,
-        quizData: answers,
-      });
   
       try {
         const response = await fetch('http://127.0.0.1:4546/submit-quiz', {

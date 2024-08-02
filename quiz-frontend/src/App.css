@@ -189,6 +189,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 60px;
 }
 th {
   background: linear-gradient(200deg, rgb(73, 0, 73),black, rgb(0, 0, 117));
