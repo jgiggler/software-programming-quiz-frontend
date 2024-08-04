@@ -102,6 +102,7 @@ const Quiz = ({ data, candidateID }) => {
                       type="radio"
                       name={`question-${index}`}
                       value={answer}
+                      required
                       checked={answers[index] === answer}
                       onChange={() => handleChange(index, answer)}
                     />
@@ -116,6 +117,7 @@ const Quiz = ({ data, candidateID }) => {
                       type="checkbox"
                       name={`question-${index}`}
                       value={answer}
+                      required
                       checked={Array.isArray(answers[index]) && answers[index].includes(answer)}
                       onChange={(e) => {
                         const newAnswers = Array.isArray(answers[index]) ? [...answers[index]] : [];
@@ -139,6 +141,7 @@ const Quiz = ({ data, candidateID }) => {
                       type="radio"
                       name={`question-${index}`}
                       value={answer}
+                      required
                       checked={answers[index] === answer}
                       onChange={() => handleChange(index, answer)}
                     />
@@ -153,6 +156,7 @@ const Quiz = ({ data, candidateID }) => {
                       type="text"
                       name={`question-${index}`}
                       value={answers[index] || ''}
+                      required
                       onChange={(e) => handleChange(index, e.target.value)}
                     />
                   </label>
