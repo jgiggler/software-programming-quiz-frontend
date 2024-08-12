@@ -7,20 +7,15 @@ To run the frontend, you will need to do a few things
 
 2. If on Windows, then you need to make sure you have Node and NPM installed. You can do this with the following commands directly from the nodejs.org website: 
 
-    # installs fnm (Fast Node Manager)
-    `winget install Schniz.fnm`
-
-    # configure fnm environment
-    `fnm env --use-on-cd | Out-String | Invoke-Expression`
-
-    # download and install Node.js
-   ` fnm use --install-if-missing 20`
-
-    # verifies the right Node.js version is in the environment
-   ` node -v` # should print `v20.16.0`
-
-    # verifies the right npm version is in the environment
-    `npm -v` # should print `10.8.1`
+    `winget install Schniz.fnm` # installs fnm (Fast Node Manager)
+   
+    `fnm env --use-on-cd | Out-String | Invoke-Expression` # configure fnm environment
+   
+   `fnm use --install-if-missing 20` # download and install Node.js
+   
+   `node -v` # should print `v20.16.0` # verifies the right Node.js version is in the environment
+   
+    `npm -v` # should print `10.8.1` # verifies the right npm version is in the environment
 
 2. Run `npm install` to install all of the dependencies. 
 
